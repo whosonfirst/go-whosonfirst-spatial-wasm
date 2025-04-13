@@ -103,4 +103,5 @@ You can test the WASM binary but change the value in the form and clicking the `
 ## See also
 
 * https://github.com/whosonfirst/go-whosonfirst-spatial
+* https://github.com/whosonfirst/go-whosonfirst-spatial-www
 * https://github.com/sfomuseum/js-sfomuseum-golang-wasm
