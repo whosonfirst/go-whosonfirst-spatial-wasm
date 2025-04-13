@@ -8,7 +8,6 @@ import (
 	"syscall/js"
 	"time"
 	
-	"github.com/paulmach/orb"	
 	"github.com/paulmach/orb/geojson"
 	"github.com/whosonfirst/go-whosonfirst-spatial/database"
 	"github.com/whosonfirst/go-whosonfirst-spatial/query"	
@@ -56,8 +55,6 @@ func PointInPolygonFunc() js.Func {
 				return nil
 			}
 
-			pt := spatial_q.Geometry.Geometry().(orb.Point)
-			
 			fc, err := geojson.UnmarshalFeatureCollection([]byte(fc_str))
 
 			if err != nil {
@@ -89,12 +86,20 @@ func PointInPolygonFunc() js.Func {
 				}
 			}
 
-			slog.Info("Time to index features", "time", time.Since(t2))
+			slog.Info("Time to index features", "count", len(fc.Features), "time", time.Since(t2))
 
 			slog.Info("Perform point-in-polygon query")
 			t3 := time.Now()
-			
-			rsp, err := db.PointInPolygon(ctx, &pt)
+
+			fn, err := query.NewSpatialFunction(ctx, "pip://")
+
+			if err != nil {
+				slog.Error("Failed to create point-in-polygon spatial function", "error", err)
+				reject.Invoke(fmt.Sprintf("Failed to create point-in-polygon function, %w", err))
+				return nil
+			}
+
+			rsp, err := query.ExecuteQuery(ctx, db, fn, spatial_q)
 
 			if err != nil {
 				slog.Error("Failed to perform point-in-polygon query", "error", err)
