@@ -10,11 +10,21 @@ This package builds a WebAssembly (WASM) binary that provides an in-memory point
 
 It is designed to be used with small (or at least smaller-than-larger) datasets which are indexed and queried at runtime. For example the output of the [whosonfirst/go-whosonfirst-spatial-www "point-in-polygon-with-tile"](https://github.com/whosonfirst/go-whosonfirst-spatial-www/tree/main/cmd/server#point-in-polygon-with-tile) endpoint which returns (Who's On First) records intersecting with and trimmed to the boundaries of a map tile.
 
-The "point-in-polygon-with-tile" endpoint exists as a way to allow a client to specify enough data to perform a point-in-polygon operation locally without having to send precise coordinate data to a remote actor. The `point_in_polygon.wasm` WASM binary it a compliment to that endpoint (and others like it) allowing the final point-in-polygon operation to happen locally.
+The "point-in-polygon-with-tile" endpoint exists as a way to allow a client to specify enough data to perform a point-in-polygon operation locally without having to send precise coordinate data to a remote actor.
+
+The `point_in_polygon.wasm` WASM binary it a compliment to that endpoint (and others like it) allowing the final point-in-polygon operation to happen locally.
+
+## Install
+
+```
+$> git clone git@github.com:whosonfirst/go-whosonfirst-spatial-wasm.git
+```
+
+This package comes with a pre-built `point_in_polygon.wasm` binary which is bundled using Git LFS. Depending on how your Git setup is configured you may need to do extra "git things" to download it. You probably won't but Git is still weird that way.
 
 ## Building
 
-Use the handy `wasm` Makefile target:
+As mentioned there is already a pre-built WASM binary but if you need or want to rebuild it use the handy `wasm` Makefile target:
 
 ```
 $> make wasm
