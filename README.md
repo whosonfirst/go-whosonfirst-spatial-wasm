@@ -80,6 +80,15 @@ $> fileserver -root www/
 2025/04/13 11:46:46 Serving www/ and listening for requests on http://localhost:8080
 ```
 
+Then when you open your web browser to `http://localhost:8080` you should see this:
+
+![](docs/images/go-whosonfirst-spatial-wasm-landing.png)
+
+This demo loads default point-in-polygon and coordinate data to query for so all you need to do is click the `Query` button and you should see this:
+
+![](docs/images/go-whosonfirst-spatial-wasm.png)
+
+You can test the WASM binary but change the value in the form and clicking the `Query` button again.
 
 ## See also
 

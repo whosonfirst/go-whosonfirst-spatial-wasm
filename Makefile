@@ -3,3 +3,8 @@ LDFLAGS=-s -w
 
 wasm:
 	GOOS=js GOARCH=wasm go build -mod $(GOMOD) -ldflags="$(LDFLAGS)" -o www/wasm/point_in_polygon.wasm cmd/point-in-polygon/main.go
+
+# As in: https://github.com/aaronland/go-http-fileserver
+
+debug:
+	fileserver -root www/
