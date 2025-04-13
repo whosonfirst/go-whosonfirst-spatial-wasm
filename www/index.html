@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+	  <title></title>
+	  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	  <meta name="referrer" content="origin">
+	  <meta http-equiv="X-UA-Compatible" content="IE=9" />
+	  <meta name="apple-mobile-web-app-capable" content="yes" />
+	  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+	  <meta name="HandheldFriendly" content="true" />
+	  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no" />
+	  <link type="text/css" rel="stylesheet" href="css/sfomuseum.spatial.wasm.css" />
+  </head>
+  <body>
+
+      <div class="container grid">
+	  <div class="row grid-item">
+	      <button type="submit" id="pip">Query</button>
+	      <textarea id="geojson"></textarea>
+	  </div>
+	  <div class="row grid-item">
+	      <ul id="results"></ul>
+	  </div>
+      </div>
+  </body>
+  <script src="javascript/sfomuseum.golang.wasm.bundle.js"></script>
+  <script src="javascript/sfomuseum.spatial.wasm.init.js"></script>  
+</html>
