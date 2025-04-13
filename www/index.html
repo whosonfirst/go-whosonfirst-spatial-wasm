@@ -9,15 +9,12 @@
 	  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
 	  <meta name="HandheldFriendly" content="true" />
 	  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no" />
-	  <link type="text/css" rel="stylesheet" href="css/bootstrap.min.css" />	  
+	  <link type="text/css" rel="stylesheet" href="css/bootstrap.min.css" />
+	  <link type="text/css" rel="stylesheet" href="css/leaflet.css" />	  	  
 	  <link type="text/css" rel="stylesheet" href="css/sfomuseum.spatial.wasm.css" />
   </head>
   <body>
 
-      <div class="container">
-	  <div class="row" id="feedback">Setting up...</div>
-      </div>
-      
       <div class="container grid">
 	  <div class="row grid-item">
 	      <form class="form">
@@ -33,18 +30,21 @@
 		  </div>
 		  
 		  <div class="mb-3">
-		      <label for="data" class="form-label">Data to index for point-in-polygon queries (GeoJSON FeatureCollection)</label>
+		      <label for="data" class="form-label">Data to index for point-in-polygon queries</label>
 		      <textarea class="form-control" id="data" rows="10"></textarea>
 		  </div>
 
+		  <div class="row" id="feedback">Setting up...</div>		  
 		  <button class="btn btn-primary" type="submit" id="submit" disabled="disabled">Query</button>	      		  
 	      </form>
-
+	      
 	  </div>
 	  <div class="row grid-item" id="results">
 	  </div>
       </div>
   </body>
+  <script src="javascript/leaflet.js"></script>
+  <script src="javascript/whosonfirst.geojson.js"></script>      
   <script src="javascript/sfomuseum.golang.wasm.bundle.js"></script>
   <script src="javascript/sfomuseum.spatial.wasm.init.js"></script>  
 </html>
