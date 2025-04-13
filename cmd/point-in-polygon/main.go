@@ -7,10 +7,10 @@ import (
 	"log/slog"
 	"syscall/js"
 	"time"
-	
+
 	"github.com/paulmach/orb/geojson"
 	"github.com/whosonfirst/go-whosonfirst-spatial/database"
-	"github.com/whosonfirst/go-whosonfirst-spatial/query"	
+	"github.com/whosonfirst/go-whosonfirst-spatial/query"
 )
 
 func PointInPolygonFunc() js.Func {
@@ -19,7 +19,7 @@ func PointInPolygonFunc() js.Func {
 
 		fc_str := args[0].String()
 		q_str := args[1].String()
-		
+
 		handler := js.FuncOf(func(this js.Value, args []js.Value) interface{} {
 
 			resolve := args[0]
@@ -27,12 +27,12 @@ func PointInPolygonFunc() js.Func {
 
 			t1 := time.Now()
 
-			defer func(){
+			defer func() {
 				slog.Info("Time to perform point-in-polygon query", "time", time.Since(t1))
 			}()
-			
+
 			ctx := context.Background()
-			
+
 			var spatial_q *query.SpatialQuery
 
 			err := json.Unmarshal([]byte(q_str), &spatial_q)
@@ -42,7 +42,7 @@ func PointInPolygonFunc() js.Func {
 				reject.Invoke(fmt.Sprintf("Failed to unmarshal spatial query, %w", err))
 				return nil
 			}
-			
+
 			if spatial_q.Geometry == nil {
 				slog.Error("Missing geometry in spatial query")
 				reject.Invoke(fmt.Sprintf("Missing geometry"))
@@ -64,7 +64,7 @@ func PointInPolygonFunc() js.Func {
 			}
 
 			db, err := database.NewSpatialDatabase(ctx, "rtree://")
-			
+
 			if err != nil {
 				slog.Error("Failed to create spatial database", "error", err)
 				reject.Invoke(fmt.Sprintf("Failed to create new database, w", err))
@@ -73,9 +73,9 @@ func PointInPolygonFunc() js.Func {
 
 			slog.Info("Index features", "count", len(fc.Features))
 			t2 := time.Now()
-			
+
 			for offset, f := range fc.Features {
-				
+
 				enc_f, _ := f.MarshalJSON()
 				err := db.IndexFeature(ctx, enc_f)
 
@@ -108,7 +108,7 @@ func PointInPolygonFunc() js.Func {
 			}
 
 			slog.Info("Time to PIP", "time", time.Since(t3))
-			
+
 			enc, err := json.Marshal(rsp)
 
 			if err != nil {

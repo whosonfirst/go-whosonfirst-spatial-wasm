@@ -135,8 +135,28 @@ sfomuseum.golang.wasm.fetch("wasm/point_in_polygon.wasm").then((rsp) => {
 
 	var osm_layer = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png');
 	osm_layer.addTo(map);
+
+	var source_layer = L.geoJSON(source_data, {
+		style: {
+				"color": "#000",
+				"weight": 1,
+				"opacity": 1,
+				"fillColor": "#00308F",
+				"fillOpacity": 0.2
+		}
+	});
+	source_layer.addTo(map);
 	
-	var feature_layer = L.geoJSON(map_fc);
+	var feature_layer = L.geoJSON(map_fc, {
+		style: {
+				"color": "#fff",
+				"weight": 2,
+				"opacity": 1,
+				"fillColor": "#ff69b4",
+				"fillOpacity": 0.3
+		}
+	});
+	
 	feature_layer.addTo(map);
 
 	var lat = parseFloat(lat_el.value);
